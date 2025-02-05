@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+main {
+    padding: 10px;
+    height: 80vh;
+}
+
+form {
+    margin: 10px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 1px 1px gray;
+    text-align: center;
+}
+
+input {
+    margin-bottom: 5px;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+input[type="text"] {
+    padding: 5px;
+    outline: none;
+    width: 90%;
+}
+
+input[type="submit"] {
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    width: 50%;
+    background-color: lightgreen;
+}
