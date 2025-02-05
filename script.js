@@ -23,14 +23,17 @@ formulario.addEventListener("submit", function(e) {
     listar()
 })
 
-function listar() {
+function listar(filtro = '') {
     ulPessoas.innerHTML = "";
     lista.forEach((item, key) => {
-        linha = document.createElement('li');
 
-        let s = `<button>[Excluir]</button><button>[Editar]</button>`
+        if (item.nome.toUpperCase().indexOf(filtro.toUpperCase()) >= 0 || filtro == "") {
+            linha = document.createElement('li');
 
-        linha.innerHTML = "Nome: " + item.nome + "Telefone: " + item.telefone + s;
-        ulPessoas.appendChild(linha);
+            let s = `<button>[Excluir]</button><button>[Editar]</button>`
+    
+            linha.innerHTML = "Nome: " + item.nome + "Telefone: " + item.telefone + s;
+            ulPessoas.appendChild(linha);
+        }
     })
 }
