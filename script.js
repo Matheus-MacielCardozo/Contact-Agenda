@@ -13,12 +13,15 @@ formulario.addEventListener("submit", function(e) {
     let novaPessoa = new Object();
     novaPessoa.nome = this.nome.value;
     novaPessoa.telefone = this.telefone.value;
-    
-    lista.push(novaPessoa);
+    if (this.id.value != "" && this.id.value >= 0) {
+        lista[this.id.value] = novaPessoa;
+    } else {
+        lista.push(novaPessoa);
+    }
 
     this.reset();
 
-    localStorage.setItem("minhaLista", JSON.stringify(lista));
+    salvarLS();
 
     listar()
 })
@@ -30,10 +33,28 @@ function listar(filtro = '') {
         if (item.nome.toUpperCase().indexOf(filtro.toUpperCase()) >= 0 || filtro == "") {
             linha = document.createElement('li');
 
-            let s = `<button>[Excluir]</button><button>[Editar]</button>`
+            let s = `<button onClick="excluir(${key})">[Excluir]</button><button onClick="editar(${key})">[Editar]</button>`
     
             linha.innerHTML = "Nome: " + item.nome + "Telefone: " + item.telefone + s;
             ulPessoas.appendChild(linha);
         }
     })
+}
+
+function excluir(id) {
+    formulario.reset();
+    lista.splice(id, 1);
+    salvarLS();
+    listar();
+}
+
+function editar(id) {
+    formulario.id.value = id;
+    formulario.nome.value = lista[id].nome;
+    formulario.telefone.value = lista[id].telefone;
+    listar();
+}
+
+function salvarLS(lista) {
+    localStorage.setItem("minhaLista", JSON.stringify(lista));
 }
